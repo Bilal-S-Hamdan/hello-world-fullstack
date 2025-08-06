@@ -49,7 +49,7 @@ jobs:
     - name: Run docker-compose on server
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-          cd /path/to/your/project
+          cd bilal/project2
           docker compose pull
           docker compose up -d --remove-orphans
         EOF
