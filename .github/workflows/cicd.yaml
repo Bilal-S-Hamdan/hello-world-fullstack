@@ -1,4 +1,4 @@
-name: Build and Push Docker images
+name: Build, Push, and Deploy
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   packages: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -40,3 +40,16 @@ jobs:
         context: ./frontend
         push: true
         tags: ghcr.io/${{ env.OWNER_LOWERCASE }}/hello-world-frontend:latest
+
+    - name: SSH into server and deploy
+      uses: webfactory/ssh-agent@v0.9.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Run docker-compose on server
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          cd /path/to/your/project
+          docker compose pull
+          docker compose up -d --remove-orphans
+        EOF

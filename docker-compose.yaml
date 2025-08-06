@@ -14,7 +14,7 @@ services:
       - "5432:5432"
 
   backend:
-    build: ./backend
+    image: ghcr.io/bilal-s-hamdan/hello-world-backend:latest
     depends_on:
       - postgres
     ports:
@@ -27,7 +27,7 @@ services:
       PGPORT: 5432
 
   frontend:
-    build: ./frontend
+    image: ghcr.io/bilal-s-hamdan/hello-world-frontend:latest
     depends_on:
       - backend
     ports:
