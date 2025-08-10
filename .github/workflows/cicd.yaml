@@ -48,7 +48,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.USER_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
             cd bilal/project2
