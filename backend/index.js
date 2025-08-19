@@ -5,7 +5,7 @@ const pool = require('./db');
 const app = express();
 app.use(cors());
 
-app.get('/message', async (req, res) => {
+app.get('/api/message', async (req, res) => {
   const result = await pool.query('SELECT * FROM message LIMIT 1');
   res.json(result.rows[0]);
 });
