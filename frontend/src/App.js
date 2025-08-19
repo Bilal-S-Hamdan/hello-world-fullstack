@@ -6,10 +6,10 @@ function App() {
 
   const fetchMessage = useCallback(async () => {
     try {
-      const response = await fetch('/message');
+      const response = await fetch('/api/message');
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
-      setMessage(data.text);
+      setMessage(data.content);
     } catch (err) {
       setError('Failed to fetch message');
       console.error(err);
